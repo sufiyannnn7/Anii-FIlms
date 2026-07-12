@@ -17,29 +17,29 @@ export interface Profile {
   socials: {
     email: string;
     instagram: string;
-    linkedin: string;
+    whatsapp: string;
   };
 }
 
 export const profile: Profile = {
-  name: 'Julian Vance',
-  role: 'Creative Director & Filmmaker',
+  name: 'Anii Films',
+  role: 'Filmmaker & Marketing Strategist',
   tagline: 'Strategic Marketing Meets Cinematic Storytelling',
   bio: 'Driven by curiosity and built through creativity, I\'m passionate about marketing, branding, and building ideas that connect with people. Alongside strategy and digital storytelling, I explore filmmaking, cinematography, and editing to create visuals that combine aesthetics, emotion, and purpose while constantly evolving both creatively and strategically.',
-  creativePhilosophy: 'My philosophy is simple: Beautiful visuals mean nothing if they don\'t serve a clear business objective. I bridge the gap between creative execution and marketing strategy. When approaching a new task, I don\'t start with the camera. I start with the audience, the business objective, and the story.',
+  creativePhilosophy: 'My philosophy is simple: beautiful visuals mean nothing if they don\'t serve a clear business objective. I bridge the gap between creative execution and marketing strategy. When approaching a new task, I don\'t start with the camera; I start with the consumer. By understanding audience psychology and market gaps, I create content that doesn\'t just look cinematic -- it performs with purpose.',
   skills: {
     marketing: [
       'Brand Strategy',
       'Creative Direction',
-      'Campaign Development',
       'Social Media Strategy',
       'Content Marketing',
+      'Digital Campaigns',
       'Audience Psychology'
     ],
     filmmaking: [
       'Cinematography',
       'Directing',
-      'Video Editing (Premiere/Resolve)',
+      'Video Editing',
       'Color Grading',
       'Lighting Design',
       'Visual Storytelling'
@@ -49,25 +49,13 @@ export const profile: Profile = {
     {
       year: '2021 - Present',
       title: 'Independent Creative Director',
-      company: 'Studio Vance',
-      description: 'Consulting for luxury and tech brands, directing commercial campaigns, and developing brand architectures.'
-    },
-    {
-      year: '2018 - 2021',
-      title: 'Head of Visual Strategy',
-      company: 'Oculus Agency',
-      description: 'Led a team of 12 creatives bridging the gap between performance marketing and high-end brand storytelling.'
-    },
-    {
-      year: '2015 - 2018',
-      title: 'Cinematographer & Editor',
-      company: 'Freelance',
-      description: 'Shot and edited short films, music videos, and digital content for emerging artists and boutique brands.'
+      company: 'Anii Films',
+      description: 'Consulting for brands, directing commercial campaigns, and developing brand architectures.'
     }
   ],
   socials: {
-    email: 'hello@julianvance.com',
-    instagram: 'https://instagram.com',
-    linkedin: 'https://linkedin.com'
+    email: 'aniket24007@gmail.com',
+    instagram: 'https://instagram.com/_aniifilms',
+    whatsapp: 'https://wa.me/919172255729'
   }
 };

@@ -4,56 +4,113 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Navbar() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('intro');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Scroll spy logic
+      if (location === '/') {
+        const sections = ['intro', 'about', 'how-i-help', 'my-work', 'contact'];
+        let current = 'intro';
+        for (const section of sections) {
+          const el = document.getElementById(section);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight / 3) {
+              current = section;
+            }
+          }
+        }
+        setActiveSection(current);
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location]);
 
   const links = [
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/filmmaking', label: 'Filmmaking' },
-    { href: '/marketing', label: 'Marketing' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+    { href: '#about', label: 'About', id: 'about' },
+    { href: '#how-i-help', label: 'Approach', id: 'how-i-help' },
+    { href: '#my-work', label: 'Work', id: 'my-work' },
+    { href: '#contact', label: 'Contact', id: 'contact' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    if (location !== '/') {
+      setLocation('/');
+      // Give it a moment to render the homepage then scroll
+      setTimeout(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    if (location !== '/') {
+      setLocation('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
-          scrolled ? 'bg-background/80 backdrop-blur-md border-border' : 'bg-transparent border-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 border-b ${
+          scrolled ? 'bg-background/40 backdrop-blur-xl border-white/5 py-4' : 'bg-transparent border-transparent py-6'
         }`}
       >
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="font-display text-xl tracking-wider text-white hover:text-accent transition-colors">
-            JULIAN VANCE
-          </Link>
+        <div className="container mx-auto px-6 flex items-center justify-between">
+          <a href="/" onClick={handleLogoClick} className="font-display text-xl tracking-[0.2em] text-white hover:text-white/70 transition-colors uppercase relative group">
+            Anii Films
+            <span className="absolute -inset-2 bg-white/5 rounded-lg opacity-0 group-hover:opacity-100 blur transition-opacity"></span>
+          </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm tracking-widest uppercase transition-colors hover:text-accent ${
-                  location.startsWith(link.href) ? 'text-white font-medium' : 'text-muted-foreground'
+              <a
+                key={link.id}
+                href={location === '/' ? link.href : `/${link.href}`}
+                onClick={(e) => handleNavClick(e, link.id)}
+                className={`text-xs tracking-[0.15em] uppercase transition-all duration-300 relative py-2 ${
+                  location === '/' && activeSection === link.id ? 'text-white' : 'text-white/50 hover:text-white'
                 }`}
               >
                 {link.label}
-              </Link>
+                {location === '/' && activeSection === link.id && (
+                  <motion.div
+                    layoutId="navbar-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/80"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </a>
             ))}
           </nav>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white/80 hover:text-white transition-colors"
             onClick={() => setMobileMenuOpen(true)}
           >
             <Menu className="w-6 h-6" />
@@ -65,35 +122,42 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[60] bg-background/95 backdrop-blur-xl flex flex-col p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[60] bg-background/95 backdrop-blur-2xl flex flex-col p-6"
           >
-            <div className="flex justify-between items-center h-14 mb-12">
-              <Link href="/" className="font-display text-xl tracking-wider text-white" onClick={() => setMobileMenuOpen(false)}>
-                JULIAN VANCE
-              </Link>
-              <button onClick={() => setMobileMenuOpen(false)} className="text-white">
+            <div className="flex justify-between items-center py-6 mb-12">
+              <a href="/" onClick={handleLogoClick} className="font-display text-xl tracking-[0.2em] text-white uppercase">
+                Anii Films
+              </a>
+              <button onClick={() => setMobileMenuOpen(false)} className="text-white/80 hover:text-white">
                 <X className="w-6 h-6" />
               </button>
             </div>
             
-            <nav className="flex flex-col gap-8">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-display tracking-wider transition-colors hover:text-accent ${
-                    location.startsWith(link.href) ? 'text-white' : 'text-muted-foreground'
+            <nav className="flex flex-col gap-8 px-4">
+              {links.map((link, i) => (
+                <motion.a
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  key={link.id}
+                  href={location === '/' ? link.href : `/${link.href}`}
+                  onClick={(e) => handleNavClick(e, link.id)}
+                  className={`text-3xl font-display tracking-wider transition-colors ${
+                    location === '/' && activeSection === link.id ? 'text-white' : 'text-white/50 hover:text-white'
                   }`}
                 >
                   {link.label}
-                </Link>
+                </motion.a>
               ))}
             </nav>
+            
+            <div className="mt-auto pb-12 px-4">
+               <p className="text-white/30 text-xs tracking-widest uppercase">Based Globally</p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

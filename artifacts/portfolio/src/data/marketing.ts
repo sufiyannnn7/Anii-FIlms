@@ -18,7 +18,6 @@ export interface MarketingCaseStudy {
 export const marketing: MarketingCaseStudy[] = [
   {
     slug: 'aura-rebrand',
-    title: 'Aura Skincare Rebrand', // Fallback for components that might use title
     campaignName: 'Aura Skincare Rebrand',
     brand: 'Aura Botanicals',
     category: 'Brand Strategy',
@@ -37,7 +36,6 @@ export const marketing: MarketingCaseStudy[] = [
   },
   {
     slug: 'nexus-launch',
-    title: 'Nexus X Launch',
     campaignName: 'Nexus X Global Launch',
     brand: 'Nexus Tech',
     category: 'Digital Campaigns',
@@ -56,7 +54,6 @@ export const marketing: MarketingCaseStudy[] = [
   },
   {
     slug: 'solstice-social',
-    title: 'Solstice Hotel Strategy',
     campaignName: 'Solstice Social Identity',
     brand: 'Solstice Boutique Hotels',
     category: 'Social Media Strategy',

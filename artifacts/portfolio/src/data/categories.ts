@@ -14,8 +14,7 @@ export const marketingCategories = [
   'Marketing Strategy',
   'Social Media Marketing',
   'Brand Strategy',
-  'Digital Campaigns',
   'Content Marketing',
-  'Advertising Campaigns',
-  'Creative Direction'
+  'Creative Direction',
+  'Digital Campaigns'
 ];
