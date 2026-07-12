@@ -1,0 +1,275 @@
+Update the existing frontend to match the following creative portfolio vision.
+
+IMPORTANT:
+Keep the existing architecture, responsiveness, reusable components, routing, and backend-ready structure. Only modify the UI, content hierarchy, animations, and styling.
+
+The website represents one individual who specializes in Marketing Strategy and Filmmaking.
+
+This is a PERSONAL PORTFOLIO, not an agency website.
+
+==================================================
+
+DESIGN STYLE
+
+Create a premium editorial-style portfolio.
+
+The feeling should be:
+
+• Minimal
+• Luxury
+• Cinematic
+• Modern
+• Elegant
+• Story-driven
+
+Use:
+
+• Black background
+• White typography
+• Soft red accent
+• Premium glassmorphism
+• Large editorial typography
+• Smooth scroll animations
+• Page transitions
+• Blur fade animations
+• Hover effects
+• Image reveal animations
+• Cinematic loading animation
+
+The design should feel similar to high-end creative portfolios, not a template.
+
+==================================================
+
+WEBSITE FLOW
+
+Follow this exact order:
+
+1. Intro
+2. About
+3. How I Help Build Brands
+4. My Work
+5. Contact
+
+==================================================
+
+SECTION 1
+
+INTRO
+
+Large cinematic hero.
+
+Headline:
+
+FILMMAKER
+MARKETER
+STORYTELLER
+
+Subheading:
+
+Stories that move people.
+Strategy that moves markets.
+
+Small paragraph:
+
+A portfolio at the intersection of cinema and consumer insight.
+
+CTA:
+
+Explore My Work
+
+Background:
+
+Muted cinematic video with dark overlay.
+
+==================================================
+
+SECTION 2
+
+ABOUT
+
+Heading:
+
+Strategic Marketing Meets Cinematic Storytelling
+
+Body:
+
+Driven by curiosity and built through creativity, I'm passionate about marketing, branding, and building ideas that connect with people.
+
+Alongside strategy and digital storytelling, I explore filmmaking, cinematography, and editing to create visuals that combine aesthetics, emotion, and purpose while constantly evolving both creatively and strategically.
+
+Create a premium editorial layout.
+
+Large typography.
+
+Split content.
+
+Smooth fade animations.
+
+==================================================
+
+SECTION 3
+
+HOW I HELP BUILD BRANDS
+
+Heading:
+
+How I Help Build Brands
+
+Intro text:
+
+My philosophy is simple:
+beautiful visuals mean nothing if they don't serve a clear business objective.
+
+I bridge the gap between creative execution and marketing strategy.
+
+When approaching a new task, I don't start with the camera;
+I start with the consumer.
+
+By understanding audience psychology and market gaps, I create content that doesn't just look cinematic—it performs with purpose.
+
+Below this create three premium glass cards.
+
+Card 1
+
+Intentional Creativity
+
+Every lighting choice, camera movement, composition, and edit exists to communicate the brand's message.
+
+Card 2
+
+Audience-First Storytelling
+
+Creating narratives that connect emotionally while addressing audience needs and business goals.
+
+Card 3
+
+Holistic Execution
+
+Maintaining strategic consistency from concept development through production and final delivery.
+
+Animate every card when scrolling.
+
+==================================================
+
+SECTION 4
+
+MY WORK
+
+Keep the existing Portfolio Selector.
+
+Display two premium cards.
+
+FILMMAKING
+
+MARKETING
+
+When the user enters either section:
+
+Show categories.
+
+Filmmaking:
+
+• Short Films
+• Cinematic Videos
+• Commercial Films
+• Music Videos
+• Behind The Scenes
+• Showreel
+
+Marketing:
+
+• Social Media Strategy
+• Marketing Strategy
+• Social Media Marketing
+• Brand Strategy
+• Content Marketing
+• Creative Direction
+• Digital Campaigns
+
+Projects must continue using reusable mock data because the backend will be connected later.
+
+Do not hardcode projects.
+
+==================================================
+
+SECTION 5
+
+CONTACT
+
+Minimal contact section.
+
+Heading:
+
+Let's Make Something Honest.
+
+Text:
+
+Whether it's branding, campaigns, filmmaking, or creative strategy, let's start with a conversation.
+
+Display:
+
+Email
+
+Instagram
+
+LinkedIn
+
+No pricing.
+
+No contact form.
+
+No Hire Me button.
+
+Only elegant contact information.
+
+==================================================
+
+NAVIGATION
+
+Floating navbar.
+
+Sections:
+
+Intro
+
+About
+
+How I Help Build Brands
+
+My Work
+
+Contact
+
+Smooth scrolling.
+
+Highlight active section.
+
+==================================================
+
+ANIMATIONS
+
+Everything should feel cinematic.
+
+Use:
+
+• Fade Up
+• Blur Reveal
+• Stagger animations
+• Hover zoom
+• Smooth image transitions
+• Scroll-triggered motion
+• Premium page transitions
+
+No flashy or distracting animations.
+
+==================================================
+
+IMPORTANT
+
+Keep every portfolio page backend-ready.
+
+All projects, categories, images, and text must continue loading from reusable mock data.
+
+Do NOT implement backend yet.
+
+The frontend must be ready so that later an admin dashboard can populate every section dynamically from a database.
