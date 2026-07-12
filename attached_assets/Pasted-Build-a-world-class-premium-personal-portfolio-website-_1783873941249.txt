@@ -1,0 +1,353 @@
+Build a world-class premium personal portfolio website for a creative professional specializing in Marketing Strategy, Branding, Creative Direction, and Filmmaking.
+
+IMPORTANT:
+This is ONLY the frontend.
+Do NOT build authentication, backend, APIs, or a database.
+
+However, architect the frontend so it can later connect seamlessly to Supabase or Firebase. Every piece of content (projects, categories, gallery, text, videos) must be loaded from reusable mock JSON/TypeScript data instead of being hardcoded.
+
+The final website must feel like an award-winning Awwwards-level creative portfolio with cinematic interactions, premium typography, smooth motion, and exceptional UX.
+
+====================================================
+
+TECH STACK
+
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- React Router
+- Lucide Icons
+- Component-based architecture
+
+====================================================
+
+DESIGN LANGUAGE
+
+Style:
+• Luxury
+• Cinematic
+• Modern
+• Editorial
+• Minimal
+• High-end
+
+Theme:
+Background: #0B0B0B
+Cards: Glassmorphism
+Text: White
+Accent: Deep Red (#C1121F)
+
+Typography:
+Large editorial headings
+Modern sans-serif body
+Excellent spacing
+Clean grid layout
+
+Animations:
+• Page transitions
+• Scroll reveal
+• Blur fade
+• Staggered animations
+• Hover lift
+• Hover glow
+• Image zoom
+• Smooth scrolling
+• Floating elements
+• Premium loading animation
+
+The entire website must be fully responsive.
+
+====================================================
+
+LANDING PAGE
+
+Full-screen hero.
+
+Background:
+Auto-playing muted cinematic reel.
+
+Dark overlay.
+
+Headline:
+
+Strategic Marketing Meets Cinematic Storytelling
+
+Subheading:
+
+Driven by curiosity and built through creativity, I'm passionate about marketing, branding, and building ideas that connect with people. Alongside strategy and digital storytelling, I explore filmmaking, cinematography, and editing to create visuals that combine aesthetics, emotion, and purpose while constantly evolving both creatively and strategically.
+
+Button:
+
+Enter Portfolio
+
+The transition into the portfolio must feel cinematic.
+
+====================================================
+
+PORTFOLIO SELECTOR
+
+After entering, present two large premium interactive cards.
+
+LEFT
+
+FILMMAKING
+
+Large cinematic background image
+
+Hover zoom
+
+Glass overlay
+
+Explore →
+
+RIGHT
+
+MARKETING
+
+Modern branding visual
+
+Hover animation
+
+Glass overlay
+
+Explore →
+
+====================================================
+
+FILMMAKING
+
+Hero Banner
+
+Categories:
+
+• Short Films
+• Cinematic Videos
+• Commercial Films
+• Music Videos
+• Behind The Scenes
+• Showreel
+
+Selecting a category dynamically filters projects.
+
+Each project card contains:
+
+Poster
+
+Title
+
+Category
+
+Year
+
+Short Description
+
+View Project
+
+Project Details Page:
+
+Large cinematic hero
+
+Project overview
+
+Challenge
+
+Creative process
+
+Gallery
+
+Embedded YouTube/Vimeo video
+
+Credits
+
+Related projects
+
+====================================================
+
+MARKETING
+
+Hero Banner
+
+Headline:
+
+How I Help Build Brands
+
+Text:
+
+My philosophy is simple:
+Beautiful visuals mean nothing if they don't serve a clear business objective.
+
+I bridge the gap between creative execution and marketing strategy.
+
+When approaching a new task, I don't start with the camera.
+I start with the audience, the business objective, and the story.
+
+Categories:
+
+• Social Media Strategy
+• Marketing Strategy
+• Social Media Marketing
+• Brand Strategy
+• Digital Campaigns
+• Content Marketing
+• Advertising Campaigns
+• Creative Direction
+
+Each category filters projects.
+
+Project cards include:
+
+Campaign Image
+
+Campaign Name
+
+Brand
+
+Category
+
+Short Description
+
+View Case Study
+
+Case Study Page:
+
+Challenge
+
+Strategy
+
+Execution
+
+Outcome
+
+Gallery
+
+Videos
+
+====================================================
+
+ABOUT
+
+Minimal editorial layout.
+
+Timeline
+
+Skills
+
+Creative philosophy
+
+Experience
+
+====================================================
+
+CONTACT
+
+Professional minimal section.
+
+Email
+
+Instagram
+
+LinkedIn placeholder
+
+No pricing
+
+No inquiry forms
+
+No "Hire Me"
+
+====================================================
+
+FOOTER
+
+Minimal.
+
+Dark.
+
+Elegant.
+
+====================================================
+
+COMPONENTS
+
+Navbar
+
+Hero
+
+Portfolio Selector
+
+Category Tabs
+
+Project Grid
+
+Project Card
+
+Project Detail
+
+Case Study
+
+Gallery
+
+Video Player
+
+Footer
+
+Everything reusable.
+
+====================================================
+
+ARCHITECTURE
+
+Use reusable mock data.
+
+Create:
+
+data/
+
+films.ts
+
+marketing.ts
+
+categories.ts
+
+profile.ts
+
+Nothing should be hardcoded inside components.
+
+====================================================
+
+IMPORTANT
+
+The frontend must be designed so that after connecting a backend, the client can log into an admin dashboard and:
+
+• Add projects
+• Edit projects
+• Delete projects
+• Upload posters
+• Upload gallery images
+• Upload thumbnails
+• Add YouTube/Vimeo links
+• Select section (Filmmaking or Marketing)
+• Select category (Short Film, Marketing Strategy, etc.)
+• Publish instantly
+
+When a project is published, it should automatically appear in the correct section and category without requiring any frontend changes.
+
+Do NOT build these backend features yet—only prepare the frontend architecture for them.
+
+====================================================
+
+QUALITY REQUIREMENTS
+
+- Clean, maintainable code
+- TypeScript interfaces
+- Reusable components
+- Mobile-first responsive design
+- SEO-ready
+- Accessible
+- High performance
+- Lazy-loaded images
+- Smooth interactions
+- No lorem ipsum
+- Use realistic sample content
+- Production-ready folder structure
+- No template-like design
