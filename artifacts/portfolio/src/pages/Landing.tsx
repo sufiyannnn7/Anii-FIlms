@@ -2,7 +2,10 @@ import { AnimatedPage } from '@/components/ui/AnimatedPage';
 import { profile } from '@/data/profile';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { Mail, Instagram, MessageCircle, ArrowRight } from 'lucide-react';
+import { Mail, Instagram, MessageCircle } from 'lucide-react';
+import { GoldDust } from '@/components/effects/GoldDust';
+import { TiltCard } from '@/components/effects/TiltCard';
+import { ContactForm } from '@/components/sections/ContactForm';
 
 export default function Landing() {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -30,6 +33,7 @@ export default function Landing() {
           />
           {/* Subtle light beams */}
           <div className="absolute top-[-20%] left-[20%] w-[60%] h-[140%] bg-white/[0.03] rotate-[35deg] blur-[120px] z-10 pointer-events-none" />
+          <GoldDust count={30} className="z-20" />
         </div>
 
         <div className="relative z-30 container mx-auto px-6 flex flex-col items-center text-center">
@@ -175,15 +179,18 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: card.delay }}
-                className="glass p-10 rounded-sm flex flex-col items-start text-left glass-hover group"
               >
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8 bg-white/5 group-hover:bg-white/10 group-hover:scale-110 transition-all duration-500">
-                  <span className="font-display text-xl text-white/50 group-hover:text-white">0{i+1}</span>
-                </div>
-                <h3 className="text-xl text-white tracking-wide mb-4 font-medium">{card.title}</h3>
-                <p className="text-white/50 font-light leading-relaxed text-sm">
-                  {card.desc}
-                </p>
+                <TiltCard maxTilt={8} className="group h-full">
+                  <div className="glass p-10 rounded-sm flex flex-col items-start text-left glass-hover h-full">
+                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8 bg-white/5 group-hover:bg-white/10 group-hover:scale-110 transition-all duration-500">
+                      <span className="font-display text-xl text-white/50 group-hover:text-white">0{i+1}</span>
+                    </div>
+                    <h3 className="text-xl text-white tracking-wide mb-4 font-medium">{card.title}</h3>
+                    <p className="text-white/50 font-light leading-relaxed text-sm">
+                      {card.desc}
+                    </p>
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -206,65 +213,72 @@ export default function Landing() {
         </div>
 
         <div className="flex-1 flex flex-col md:flex-row container mx-auto px-6 gap-6 max-w-7xl pb-16">
-          <Link href="/filmmaking" className="group relative flex-1 min-h-[40dvh] md:min-h-full overflow-hidden flex items-center justify-center cursor-pointer rounded-sm">
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="/attached_assets/generated_images/filmmaking_bg.jpg" 
-                alt="Filmmaking" 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-[0.3] group-hover:brightness-[0.6]"
-              />
-              <div className="absolute inset-0 bg-background/40 group-hover:bg-transparent transition-colors duration-700" />
-            </div>
-            
-            <div className="relative z-10 text-center p-8 glass mx-8 md:mx-12 rounded-sm overflow-hidden glass-hover transform transition-transform duration-500 group-hover:-translate-y-2 border-white/10 backdrop-blur-md">
-              <h3 className="font-display text-4xl md:text-5xl text-white mb-6 tracking-wide">Filmmaking</h3>
-              <div className="flex items-center justify-center text-white/60 tracking-[0.2em] uppercase text-xs font-medium group-hover:text-white transition-colors">
-                <span className="mr-3">Explore</span>
-                <motion.span 
-                  initial={{ x: 0 }}
-                  className="group-hover:translate-x-2 transition-transform duration-300"
-                >
-                  →
-                </motion.span>
+          <TiltCard maxTilt={5} glare={false} className="group flex-1 min-h-[40dvh] md:min-h-full rounded-sm">
+            <Link href="/filmmaking" className="relative block w-full h-full min-h-[40dvh] md:min-h-full overflow-hidden flex items-center justify-center cursor-pointer rounded-sm">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="/attached_assets/generated_images/filmmaking_bg.jpg" 
+                  alt="Filmmaking" 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-[0.3] group-hover:brightness-[0.6]"
+                />
+                <div className="absolute inset-0 bg-background/40 group-hover:bg-transparent transition-colors duration-700" />
               </div>
-            </div>
-          </Link>
+              
+              <div className="relative z-10 text-center p-8 glass mx-8 md:mx-12 rounded-sm overflow-hidden glass-hover transform transition-transform duration-500 group-hover:-translate-y-2 border-white/10 backdrop-blur-md">
+                <h3 className="font-display text-4xl md:text-5xl text-white mb-6 tracking-wide">Filmmaking</h3>
+                <div className="flex items-center justify-center text-white/60 tracking-[0.2em] uppercase text-xs font-medium group-hover:text-white transition-colors">
+                  <span className="mr-3">Explore</span>
+                  <motion.span 
+                    initial={{ x: 0 }}
+                    className="group-hover:translate-x-2 transition-transform duration-300"
+                  >
+                    →
+                  </motion.span>
+                </div>
+              </div>
+            </Link>
+          </TiltCard>
 
-          <Link href="/marketing" className="group relative flex-1 min-h-[40dvh] md:min-h-full overflow-hidden flex items-center justify-center cursor-pointer rounded-sm">
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="/attached_assets/generated_images/marketing_bg.jpg" 
-                alt="Marketing" 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-[0.3] group-hover:brightness-[0.6]"
-              />
-              <div className="absolute inset-0 bg-background/40 group-hover:bg-transparent transition-colors duration-700" />
-            </div>
-            
-            <div className="relative z-10 text-center p-8 glass mx-8 md:mx-12 rounded-sm overflow-hidden glass-hover transform transition-transform duration-500 group-hover:-translate-y-2 border-white/10 backdrop-blur-md">
-              <h3 className="font-display text-4xl md:text-5xl text-white mb-6 tracking-wide">Marketing</h3>
-              <div className="flex items-center justify-center text-white/60 tracking-[0.2em] uppercase text-xs font-medium group-hover:text-white transition-colors">
-                <span className="mr-3">Explore</span>
-                <motion.span 
-                  initial={{ x: 0 }}
-                  className="group-hover:translate-x-2 transition-transform duration-300"
-                >
-                  →
-                </motion.span>
+          <TiltCard maxTilt={5} glare={false} className="group flex-1 min-h-[40dvh] md:min-h-full rounded-sm">
+            <Link href="/marketing" className="relative block w-full h-full min-h-[40dvh] md:min-h-full overflow-hidden flex items-center justify-center cursor-pointer rounded-sm">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="/attached_assets/generated_images/marketing_bg.jpg" 
+                  alt="Marketing" 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-[0.3] group-hover:brightness-[0.6]"
+                />
+                <div className="absolute inset-0 bg-background/40 group-hover:bg-transparent transition-colors duration-700" />
               </div>
-            </div>
-          </Link>
+              
+              <div className="relative z-10 text-center p-8 glass mx-8 md:mx-12 rounded-sm overflow-hidden glass-hover transform transition-transform duration-500 group-hover:-translate-y-2 border-white/10 backdrop-blur-md">
+                <h3 className="font-display text-4xl md:text-5xl text-white mb-6 tracking-wide">Marketing</h3>
+                <div className="flex items-center justify-center text-white/60 tracking-[0.2em] uppercase text-xs font-medium group-hover:text-white transition-colors">
+                  <span className="mr-3">Explore</span>
+                  <motion.span 
+                    initial={{ x: 0 }}
+                    className="group-hover:translate-x-2 transition-transform duration-300"
+                  >
+                    →
+                  </motion.span>
+                </div>
+              </div>
+            </Link>
+          </TiltCard>
         </div>
       </section>
 
       {/* Contact */}
-      <section id="contact" className="relative min-h-[80vh] py-32 flex items-center border-t border-white/5 bg-secondary/10 z-20">
-        <div className="container mx-auto px-6 max-w-5xl">
+      <section id="contact" className="relative min-h-[80vh] py-32 flex items-center border-t border-white/5 bg-secondary/10 z-20 overflow-hidden">
+        <GoldDust count={26} />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#e0b86e]/[0.04] rounded-full blur-[160px] pointer-events-none" />
+
+        <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-20 text-center"
+            className="mb-16 text-center"
           >
             <h2 className="font-display text-5xl md:text-7xl mb-8 text-white">Let's Make Something Honest.</h2>
             <div className="w-16 h-[1px] bg-white/30 mx-auto mb-8" />
@@ -273,50 +287,65 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.a
-              href={`mailto:${profile.socials.email}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="group flex flex-col items-center justify-center p-12 glass rounded-sm glass-hover text-center"
-            >
-              <Mail className="w-8 h-8 text-white/50 group-hover:text-white mb-6 transition-colors" />
-              <h3 className="text-sm uppercase tracking-[0.2em] mb-2 text-white/70 group-hover:text-white transition-colors">Email</h3>
-              <p className="text-white/40 text-sm font-light mt-auto">aniket24007@gmail.com</p>
-            </motion.a>
-
-            <motion.a
-              href={profile.socials.instagram}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="group flex flex-col items-center justify-center p-12 glass rounded-sm glass-hover text-center"
-            >
-              <Instagram className="w-8 h-8 text-white/50 group-hover:text-white mb-6 transition-colors" />
-              <h3 className="text-sm uppercase tracking-[0.2em] mb-2 text-white/70 group-hover:text-white transition-colors">Instagram</h3>
-              <p className="text-white/40 text-sm font-light mt-auto">@_aniifilms</p>
-            </motion.a>
-
-            <motion.a
-              href={profile.socials.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="group flex flex-col items-center justify-center p-12 glass rounded-sm glass-hover text-center"
-            >
-              <MessageCircle className="w-8 h-8 text-white/50 group-hover:text-white mb-6 transition-colors" />
-              <h3 className="text-sm uppercase tracking-[0.2em] mb-2 text-white/70 group-hover:text-white transition-colors">WhatsApp</h3>
-              <p className="text-white/40 text-sm font-light mt-auto">+91 9172255729</p>
-            </motion.a>
+          <div className="flex items-center justify-center gap-8 md:gap-14">
+            {[
+              {
+                href: `mailto:${profile.socials.email}`,
+                icon: Mail,
+                label: 'Email',
+                color: '#EA4335',
+                shadow: 'rgba(234,67,53,0.55)',
+                external: false,
+              },
+              {
+                href: profile.socials.whatsapp,
+                icon: MessageCircle,
+                label: 'WhatsApp',
+                color: '#25D366',
+                shadow: 'rgba(37,211,102,0.55)',
+                external: true,
+              },
+              {
+                href: profile.socials.instagram,
+                icon: Instagram,
+                label: 'Instagram',
+                color: '#E1306C',
+                shadow: 'rgba(225,48,108,0.55)',
+                external: true,
+              },
+            ].map((item, i) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noreferrer' : undefined}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.15 * i }}
+                whileHover={{ y: -6, scale: 1.06 }}
+                whileTap={{ scale: 0.95 }}
+                className="group flex flex-col items-center gap-4"
+              >
+                <span
+                  className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full transition-shadow duration-500"
+                  style={{
+                    backgroundColor: item.color,
+                    boxShadow: `0 0 0px ${item.shadow}`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.boxShadow = `0 0 45px ${item.shadow}`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.boxShadow = `0 0 0px ${item.shadow}`)}
+                >
+                  <item.icon className="w-8 h-8 md:w-9 md:h-9 text-white" strokeWidth={1.75} />
+                </span>
+                <span className="text-white/50 group-hover:text-white text-[10px] md:text-xs uppercase tracking-[0.2em] transition-colors">
+                  {item.label}
+                </span>
+              </motion.a>
+            ))}
           </div>
+
+          <ContactForm />
         </div>
       </section>
     </AnimatedPage>
