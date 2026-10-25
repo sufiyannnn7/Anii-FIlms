@@ -2,8 +2,10 @@ import { Link, useLocation } from 'wouter';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSiteSettings } from '@/lib/settings';
 
 export function Navbar() {
+  const { data: settings } = useSiteSettings();
   const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,9 +15,8 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Scroll spy logic
       if (location === '/') {
-        const sections = ['intro', 'about', 'how-i-help', 'my-work', 'contact'];
+        const sections = ['intro', 'about', 'philosophy', 'work', 'contact'];
         let current = 'intro';
         for (const section of sections) {
           const el = document.getElementById(section);
@@ -31,15 +32,33 @@ export function Navbar() {
     };
     
     window.addEventListener('scroll', handleScroll);
-    // Initial check
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location]);
 
+  useEffect(() => {
+    if (location === '/') {
+      const targetId = localStorage.getItem('scroll-to-section');
+      if (targetId) {
+        localStorage.removeItem('scroll-to-section');
+        setTimeout(() => {
+          if (targetId === 'top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            const el = document.getElementById(targetId);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        }, 350);
+      }
+    }
+  }, [location]);
+
   const links = [
     { href: '#about', label: 'About', id: 'about' },
-    { href: '#how-i-help', label: 'Approach', id: 'how-i-help' },
-    { href: '#my-work', label: 'Work', id: 'my-work' },
+    { href: '#philosophy', label: 'Approach', id: 'philosophy' },
+    { href: '#work', label: 'Work', id: 'work' },
     { href: '#contact', label: 'Contact', id: 'contact' },
   ];
 
@@ -48,13 +67,13 @@ export function Navbar() {
     setMobileMenuOpen(false);
     
     if (location !== '/') {
+      localStorage.setItem('scroll-to-section', targetId);
       setLocation('/');
-      // Give it a moment to render the homepage then scroll
-      setTimeout(() => {
-        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
     } else {
-      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -62,10 +81,8 @@ export function Navbar() {
     e.preventDefault();
     setMobileMenuOpen(false);
     if (location !== '/') {
+      localStorage.setItem('scroll-to-section', 'top');
       setLocation('/');
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -73,91 +90,81 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 border-b ${
-          scrolled ? 'bg-background/40 backdrop-blur-xl border-white/5 py-4' : 'bg-transparent border-transparent py-6'
-        }`}
-      >
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          <a href="/" onClick={handleLogoClick} className="font-display text-xl tracking-[0.2em] text-white hover:text-white/70 transition-colors uppercase relative group">
-            Anii Films
-            <span className="absolute -inset-2 bg-white/5 rounded-lg opacity-0 group-hover:opacity-100 blur transition-opacity"></span>
-          </a>
+      <header className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
+        <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className={`pointer-events-auto flex items-center bg-[#eae8dd]/80 backdrop-blur-md rounded-full px-12 md:px-16 py-4 border border-foreground/5 shadow-sm transition-all duration-500 ${scrolled ? 'shadow-md bg-[#eae8dd]/95 py-3.5' : ''}`}
+        >
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-12 lg:gap-16">
             {links.map((link) => (
               <a
                 key={link.id}
                 href={location === '/' ? link.href : `/${link.href}`}
                 onClick={(e) => handleNavClick(e, link.id)}
-                className={`text-xs tracking-[0.15em] uppercase transition-all duration-300 relative py-2 ${
-                  location === '/' && activeSection === link.id ? 'text-white' : 'text-white/50 hover:text-white'
+                className={`text-xs sm:text-sm tracking-[0.2em] uppercase transition-colors duration-300 font-bold ${
+                  location === '/' && activeSection === link.id 
+                    ? 'text-foreground' 
+                    : 'text-foreground/50 hover:text-foreground'
                 }`}
               >
                 {link.label}
-                {location === '/' && activeSection === link.id && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/80"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
               </a>
             ))}
           </nav>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-white/80 hover:text-white transition-colors"
             onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden text-foreground hover:text-foreground/70 transition-colors ml-4"
+            aria-label="Open menu"
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-5 h-5" />
           </button>
-        </div>
+        </motion.div>
       </header>
 
-      {/* Mobile Nav */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[60] bg-background/95 backdrop-blur-2xl flex flex-col p-6"
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl flex flex-col justify-center items-center"
           >
-            <div className="flex justify-between items-center py-6 mb-12">
-              <a href="/" onClick={handleLogoClick} className="font-display text-xl tracking-[0.2em] text-white uppercase">
-                Anii Films
-              </a>
-              <button onClick={() => setMobileMenuOpen(false)} className="text-white/80 hover:text-white">
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+            <div className="absolute top-0 left-0 w-full h-full noise-overlay opacity-30 mix-blend-overlay pointer-events-none"></div>
             
-            <nav className="flex flex-col gap-8 px-4">
-              {links.map((link, i) => (
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-8 right-8 p-3 text-foreground/70 hover:text-foreground bg-foreground/5 rounded-full transition-all"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <nav className="flex flex-col items-center gap-10">
+              {links.map((link, idx) => (
                 <motion.a
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   key={link.id}
                   href={location === '/' ? link.href : `/${link.href}`}
                   onClick={(e) => handleNavClick(e, link.id)}
-                  className={`text-3xl font-display tracking-wider transition-colors ${
-                    location === '/' && activeSection === link.id ? 'text-white' : 'text-white/50 hover:text-white'
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  className={`font-display text-4xl uppercase tracking-widest ${
+                    location === '/' && activeSection === link.id 
+                      ? 'text-foreground' 
+                      : 'text-foreground/40 hover:text-foreground'
                   }`}
                 >
                   {link.label}
                 </motion.a>
               ))}
             </nav>
-            
-            <div className="mt-auto pb-12 px-4">
-               <p className="text-white/30 text-xs tracking-widest uppercase">Based Globally</p>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

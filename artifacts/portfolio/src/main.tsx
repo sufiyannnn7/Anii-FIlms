@@ -1,3 +1,5 @@
+import { supabase } from "./lib/supabase";
+
 import { createRoot } from 'react-dom/client';
 
 import App from './App';

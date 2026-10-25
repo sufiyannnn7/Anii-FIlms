@@ -1,20 +1,11 @@
 export const filmCategories = [
   'All',
-  'Short Films',
-  'Cinematic Videos',
-  'Commercial Films',
-  'Music Videos',
-  'Behind The Scenes',
-  'Showreel'
+  'Videography',
+  'Cinematography'
 ];
 
 export const marketingCategories = [
   'All',
-  'Social Media Strategy',
-  'Marketing Strategy',
-  'Social Media Marketing',
-  'Brand Strategy',
-  'Content Marketing',
-  'Creative Direction',
-  'Digital Campaigns'
+  'Brand Identity System',
+  'Social and Content Strategy'
 ];

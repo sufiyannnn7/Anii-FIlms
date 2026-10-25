@@ -19,7 +19,7 @@ export const films: FilmProject[] = [
   {
     slug: 'neon-echoes',
     title: 'Neon Echoes',
-    category: 'Short Films',
+    category: 'Cinematography',
     year: 2023,
     shortDescription: 'A sci-fi short exploring memory and identity in a cybernetic future.',
     posterUrl: '/attached_assets/generated_images/film_1_poster.jpg',
@@ -42,7 +42,7 @@ export const films: FilmProject[] = [
   {
     slug: 'midnight-run',
     title: 'Midnight Run',
-    category: 'Commercial Films',
+    category: 'Videography',
     year: 2024,
     shortDescription: 'High-octane commercial campaign for a luxury automotive brand.',
     posterUrl: '/attached_assets/generated_images/film_3_poster.jpg',
@@ -65,7 +65,7 @@ export const films: FilmProject[] = [
   {
     slug: 'velvet-skies',
     title: 'Velvet Skies',
-    category: 'Music Videos',
+    category: 'Cinematography',
     year: 2022,
     shortDescription: 'A surreal visual journey accompanying the hit indie track.',
     posterUrl: '/attached_assets/generated_images/film_2_poster.jpg',
@@ -88,7 +88,7 @@ export const films: FilmProject[] = [
   {
     slug: 'the-craft-bts',
     title: 'The Craft: Behind The Lens',
-    category: 'Behind The Scenes',
+    category: 'Videography',
     year: 2023,
     shortDescription: 'An intimate look at the chaos and beauty of a film set.',
     posterUrl: '/attached_assets/generated_images/filmmaking_bg.jpg',

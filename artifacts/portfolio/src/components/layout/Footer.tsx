@@ -1,42 +1,80 @@
-import { profile } from '@/data/profile';
+import { useSiteSettings } from '@/lib/settings';
 
 export function Footer() {
+  const { data: settings, isLoading } = useSiteSettings();
+  
+  if (isLoading) return null;
+
   const handleScrollTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const hasSettings = !!settings;
+  
+  const showLogo = !!settings?.logo_url;
+  const logoUrl = settings?.logo_url;
+  
+  const showBrandName = !settings || !!settings.brand_name;
+  const brandName = settings?.brand_name || 'Anii Films';
+  
+  const showTagline = !hasSettings || !!settings.tagline;
+  const tagline = settings?.tagline || 'Strategic Marketing Meets Cinematic Storytelling';
+  
+  const showEmail = !hasSettings || !!settings.contact_email;
+  const email = settings?.contact_email || 'aniket24007@gmail.com';
+  
+  const showInstagram = !hasSettings || !!settings.instagram_url;
+  const instagram = settings?.instagram_url || 'https://instagram.com/_aniifilms';
+  
+  const showWhatsapp = !hasSettings || !!settings.contact_phone;
+  const whatsapp = settings?.contact_phone 
+    ? `https://wa.me/${settings.contact_phone.replace(/\D/g, '')}` 
+    : 'https://wa.me/919172255729';
+
   return (
-    <footer className="border-t border-white/5 bg-background py-16 md:py-24 relative overflow-hidden">
+    <footer className="border-t border-foreground/10 bg-[#ebeae4]/20 pt-16 pb-8 relative overflow-hidden">
       {/* Subtle ambient light */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#631a1a]/[0.01] rounded-full blur-[100px] pointer-events-none" />
       
-      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-        <div className="max-w-sm">
-          <a href="#" onClick={handleScrollTop} className="font-display text-2xl tracking-[0.2em] text-white mb-6 block hover:text-white/70 transition-colors uppercase">
-            Anii Films
-          </a>
-          <p className="text-white/50 text-sm leading-relaxed font-light">
-            {profile.tagline}. <br/>
-            Based globally. Available for commercial and artistic commissions.
-          </p>
-        </div>
+      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center gap-10">
         
-        <div className="flex flex-col gap-6 text-sm">
-          <h4 className="text-white/30 uppercase tracking-widest font-medium text-xs mb-2">Connect</h4>
-          <a href={`mailto:${profile.socials.email}`} className="text-white/60 hover:text-white transition-colors tracking-wide">
-            Email
+        {/* Brand / Logo (Optional) */}
+        {(showLogo || showBrandName) && (
+          <a href="#" onClick={handleScrollTop} className="flex flex-col items-center gap-4 font-display text-xl sm:text-2xl tracking-[0.2em] text-foreground hover:text-foreground/80 transition-colors uppercase">
+            {showLogo && (
+              <div className="w-12 h-12 rounded-full overflow-hidden border border-foreground/20 flex items-center justify-center bg-black shrink-0 shadow-[0_0_15px_rgba(0,0,0,0.15)]">
+                <img src={logoUrl || undefined} alt="Logo" className="w-full h-full object-cover scale-105" />
+              </div>
+            )}
+            {showBrandName && <span>{brandName}</span>}
           </a>
-          <a href={profile.socials.instagram} target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors tracking-wide">
-            Instagram
-          </a>
-          <a href={profile.socials.whatsapp} target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors tracking-wide">
-            WhatsApp
-          </a>
-        </div>
+        )}
+
+        {/* Connect Links */}
+        {(showEmail || showInstagram || showWhatsapp) && (
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 text-[11px] uppercase tracking-[0.25em] font-bold text-foreground/60">
+            {showEmail && (
+              <a href={`mailto:${email}`} className="hover:text-foreground transition-colors">
+                Email
+              </a>
+            )}
+            {showInstagram && (
+              <a href={instagram} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                Instagram
+              </a>
+            )}
+            {showWhatsapp && (
+              <a href={whatsapp} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                WhatsApp
+              </a>
+            )}
+          </div>
+        )}
       </div>
-      <div className="container mx-auto px-6 mt-20 pt-8 border-t border-white/5 text-xs text-white/30 flex flex-col md:flex-row justify-between items-center gap-4 tracking-wider">
-        <p>&copy; {new Date().getFullYear()} Anii Films. All rights reserved.</p>
+
+      <div className="container mx-auto px-6 mt-16 pt-8 border-t border-foreground/10 text-[10px] uppercase tracking-[0.2em] text-foreground/40 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p>{new Date().getFullYear()} {showBrandName ? brandName : 'Portfolio'}. All rights reserved.</p>
         <p>Built with intent.</p>
       </div>
     </footer>
